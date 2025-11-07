@@ -1,0 +1,393 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Educacional Gamificada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #2980b9; /* Azul */
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #d4e6f1; /* Azul claro */
+        }
+
+        .content {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        /* Estilos para as abas */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilos para tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        /* Estilos para formulários */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            background-color: #8e44ad; /* Vinho */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #7d3c98; /* Vinho mais escuro */
+        }
+
+        /* Estilos específicos para cada aba */
+        #tarefas table {
+            /* Estilos específicos para a tabela de tarefas */
+        }
+
+        /* Cores e detalhes adicionais */
+        a {
+            color: #8e44ad; /* Vinho */
+        }
+
+        /* Animações */
+        .animate__fadeIn {
+            animation-duration: 0.75s;
+        }
+
+        /* Ranking */
+        #ranking-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #ranking-list li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #8e44ad; /* Vinho */
+            border-radius: 4px;
+        }
+
+        /* Perfil */
+        #profile-info {
+            margin-bottom: 20px;
+        }
+
+        #profile-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        /* Notificações */
+        .notification {
+            background-color: #fce4ec; /* Rosa claro */
+            color: #e74c3c; /* Vermelho */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        /* Estilos para login e registro */
+        #login, #register {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #login input, #register input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        #login button, #register button {
+            background-color: #8e44ad; /* Vinho */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #login button:hover, #register button:hover {
+            background-color: #7d3c98;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Plataforma Educacional Gamificada</h1>
+    </div>
+
+    <!-- Tela de Login -->
+    <div id="login">
+        <h2>Login</h2>
+        <button onclick="loginWithGoogle()">Login com Google</button>
+    </div>
+
+    <!-- Tela de Registro -->
+    <div id="register">
+        <h2>Registro</h2>
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="register()">Registrar</button>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showTab('tarefas')"><i class="fas fa-tasks"></i> Tarefas</a></li>
+                <li><a href="#" onclick="showTab('simulados')"><i class="fas fa-file-alt"></i> Simulados</a></li>
+                <li><a href="#" onclick="showTab('perfil')"><i class="fas fa-user-circle"></i> Perfil</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="tarefas" class="tab-content active animate__animated animate__fadeIn">
+                <h2>Tarefas</h2>
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Título da tarefa">
+                </div>
+                <div class="form-group">
+                    <label for="dataEntrega">Data de Entrega:</label>
+                    <input type="date" id="dataEntrega" name="dataEntrega">
+                </div>
+                <div class="form-group">
+                    <label for="materia">Matéria:</label>
+                    <input type="text" id="materia" name="materia" placeholder="Matéria da tarefa">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" placeholder="Descrição da tarefa"></textarea>
+                </div>
+                <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Data de Entrega</th>
+                            <th>Matéria</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaTarefas">
+                        <!-- Aqui serão adicionadas as tarefas -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="simulados" class="tab-content animate__animated animate__fadeIn">
+                <h2>Simulados</h2>
+                <div class="form-group">
+                    <label for="materiaSimulado">Matéria:</label>
+                    <input type="text" id="materiaSimulado" name="materiaSimulado" placeholder="Matéria do simulado">
+                </div>
+                <div class="form-group">
+                    <label for="assuntoSimulado">Assunto:</label>
+                    <input type="text" id="assuntoSimulado" name="assuntoSimulado" placeholder="Assunto do simulado">
+                </div>
+                <button onclick="adicionarMateriaSimulado()">Adicionar Matéria</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Matéria</th>
+                            <th>Assunto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaSimulados">
+                        <!-- Aqui serão adicionadas as matérias -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="perfil" class="tab-content animate__animated animate__fadeIn">
+                <h2>Perfil</h2>
+                <div id="profile-info">
+                    <img src="https://via.placeholder.com/100" alt="Foto de Perfil">
+                    <h3 id="nomeUsuario">Nome do Usuário</h3>
+                    <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f98c8a8c988b9096b99c81989489959cd79a9694">[email&#160;protected]</a></p>
+                    <p>Pontuação: <span id="pontuacaoUsuario">0</span></p>
+                    <button onclick="personalizarPerfil()">Personalizar Perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            // suas credenciais do Firebase
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider).then((result) => {
+                // Lidar com o resultado do login
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        function register() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    // Lidar com o registro
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach((tab) => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Função para adicionar tarefas
+        function adicionarTarefa() {
+            const titulo = document.getElementById('titulo').value;
+            const dataEntrega = document.getElementById('dataEntrega').value;
+            const materia = document.getElementById('materia').value;
+            const descricao = document.getElementById('descricao').value;
+
+            if (titulo && dataEntrega && materia && descricao) {
+                const listaTarefas = document.getElementById('listaTarefas');
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${titulo}</td>
+                    <td>${dataEntrega}</td>
+                    <td>${materia}</td>
+                    <td>Não Concluída</td>
+                    <td><button onclick="marcarComoConcluida(this)">Marcar como concluída</button></td>
+                `;
+                listaTarefas.appendChild(tr);
+            }
+        }
+
+        // Função para marcar tarefa como concluída
+        function marcarComoConcluida(button) {
+            const row = button.closest('tr');
+            row.cells[3].innerText = 'Concluída';
+            button.disabled = true;
+        }
+    </script>
+</body>
+</html>
